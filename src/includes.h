@@ -69,5 +69,13 @@ typedef unsigned short word;
 #define TD5 (SIU.GPDO[57].B.PDO)
 #endif
 
+#if 1
+#define K1 (SIU.GPDI[48].B.PDI)
+#define K2 (SIU.GPDI[50].B.PDI)
+#define K3 (SIU.GPDI[52].B.PDI)
+#define K4 (SIU.GPDI[54].B.PDI)
+#define K5 (SIU.GPDI[56].B.PDI)
+#endif
+
 
 #endif

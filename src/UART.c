@@ -129,6 +129,22 @@ void intc_serial_port_1_RX()
 	g_serial_port_1_f = 1;
 	g_serial_port_1_data = rev_ch;
 	LINFLEX_1.UARTSR.B.DRF=1;
+	if (0x00 == rev_ch)
+	{
+		open_StepMotor(0);
+	}
+	else if (0x01 == rev_ch)
+	{
+		open_StepMotor(1);
+	}
+	else if (0x02 == rev_ch)
+	{
+		close_StepMotor();
+	}
+	else
+	{
+		set_StepMotor((WORD)rev_ch<<8);
+	}
 }
 
 
@@ -185,7 +201,7 @@ void intc_serial_port_2_RX(void)
 	rev_ch=(BYTE)LINFLEX_2.BDRM.B.DATA4;
 	LINFLEX_2.UARTSR.B.DRF=1;
 	
-	rev_RFID_frame(rev_ch);
+	//rev_RFID_frame(rev_ch);
 }
 
 

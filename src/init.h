@@ -20,8 +20,8 @@ extern void init_pit(void);
 extern void init_encoder(void);
 extern void enable_irq(void);
 extern int is_big_endian();
-
-
+extern void init_key(void);
+extern void init_test_LED(void);
 
 
 extern void init_optical_encoder(void);

@@ -16,10 +16,10 @@ void PitISR(void)
 	g_f_pit = 1;
 	
 	g_time_basis_PIT++;	/* ¼ÆÊ± */
-	
+#if 0
 	/* control StepMotor */
 	stepMorotZunamhe = (WORD)EMIOS_0.CH[24].CCNTR.R;
-	if (data_StepMotor.current_dir == 1)
+	if (data_StepMotor.target_dir == 1)
 	{
 		stepMorotZunamhe = 0 - stepMorotZunamhe;
 	}
@@ -48,7 +48,7 @@ void PitISR(void)
 			data_StepMotor.is_OK = 1;
 		}
 	}
-	
+#endif
 	PIT.CH[1].TFLG.B.TIF = 1;	// MPC56xxB/P/S: Clear PIT 1 flag by writing 1 
 }
 

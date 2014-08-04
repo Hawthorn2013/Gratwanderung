@@ -2,6 +2,8 @@
 #include "includes.h"
 
 
+void INTC_StepMotor_Counter_Matched(void);
+
 /*-----------------------------------------------------------------------*/
 /* 初始化步进电机                                                        */
 /*-----------------------------------------------------------------------*/
@@ -56,28 +58,44 @@ void close_StepMotor(void)
 
 
 /*-----------------------------------------------------------------------*/
-/* 计数模块                                                      		 */
+/* 计数模块                                                              */
 /*-----------------------------------------------------------------------*/
 void init_StepMotor_counter(void)	//PD12模数计数器入口，上升沿
 {
 	/* 计数部分 PD12 */
-	EMIOS_0.CH[24].CCR.B.MODE = 0x51;	/* Mode is MCB */
+	EMIOS_0.CH[24].CCR.B.MODE = 0x11;	//0x51;	//	/* Mode is MCB */
 	EMIOS_0.CH[24].CCR.B.BSL = 0x3;	/* Use internal counter */
 	EMIOS_0.CH[24].CCR.B.UCPRE=0;	/* Set channel prescaler to divide by 1 */
 	EMIOS_0.CH[24].CCR.B.UCPEN = 1;	/* Enable prescaler; uses default divide by 1 */
 	EMIOS_0.CH[24].CCR.B.FREN = 0;	/* Freeze channel counting when in debug mode */
 	EMIOS_0.CH[24].CCR.B.EDPOL=1;	/* Edge Select rising edge */
-	EMIOS_0.CH[24].CADR.R=0xffff;
+	EMIOS_0.CH[24].CADR.R = 0xffff;
+	EMIOS_0.CH[24].CCR.B.FEN = 1;
 	/* (WORD)EMIOS_0.CH[24].CCNTR.R 数据寄存器 */
+	
+	INTC_InstallINTCInterruptHandler(INTC_StepMotor_Counter_Matched, 153, 3);
 	SIU.PCR[60].R = 0x0100;	/* Initialize pad for eMIOS channel Initialize pad for input */
 }
 
 
 /*-----------------------------------------------------------------------*/
-/* 控制步进电机                                                              */
+/* 步进电机达到预订转数                                                  */
 /*-----------------------------------------------------------------------*/
-void set_StepMotor(SDWORD site)
+void INTC_StepMotor_Counter_Matched(void)
 {
+	close_StepMotor();
+	data_StepMotor.is_OK = 1;
+	
+	EMIOS_0.CH[24].CSR.B.FLAG = 1;
+}
+
+
+/*-----------------------------------------------------------------------*/
+/* 控制步进电机                                                          */
+/*-----------------------------------------------------------------------*/
+void set_StepMotor(SDWORD siteZunamhe)
+{
+#if 0
 	data_StepMotor.is_OK = 0;
 	data_StepMotor.target_site = site;
 	if (data_StepMotor.current_site > data_StepMotor.target_site)
@@ -88,5 +106,31 @@ void set_StepMotor(SDWORD site)
 	{
 		data_StepMotor.target_dir = 0;
 	}
-	
+#endif
+	if (!siteZunamhe)
+	{
+		return;
+	}
+	data_StepMotor.is_OK = 0;
+	data_StepMotor.target_site = data_StepMotor.current_site + siteZunamhe;
+	if (data_StepMotor.current_site > data_StepMotor.target_site)
+	{
+		data_StepMotor.target_dir = 1;
+	}
+	else
+	{
+		data_StepMotor.target_dir = 0;
+	}
+	EMIOS_0.CH[24].CCR.B.MODE = 0x00;
+	EMIOS_0.CH[24].CCR.B.MODE = 0x11;
+	if (siteZunamhe > 0)
+	{
+		EMIOS_0.CH[24].CADR.R = siteZunamhe;
+		open_StepMotor(0);
+	}
+	else
+	{
+		EMIOS_0.CH[24].CADR.R = 0 - siteZunamhe;
+		open_StepMotor(1);
+	}
 }
