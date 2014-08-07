@@ -1,6 +1,9 @@
 #ifndef __STEPMOTOR_H__
 #define __STEPMOTOR_H__
 
+#define ZUNAMHE_DRAWBRIDGE_UP (50)	/* µı«≈…˝∆æ‡¿Î */
+#define ZUNAMHE_DRAHTBRIDGE_DOWN (50)	/* ∏÷Àø«≈µ¯¬‰æ‡¿Î */
+
 #define STEPMOTOR_DIR (SIU.GPDO[3].R)
 
 extern void init_EMIOS_0_StepMotor(void);

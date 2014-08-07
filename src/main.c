@@ -17,9 +17,20 @@ int main(void)
 	//init_serial_port_3();
 	//init_optical_encoder();
 	init_DSPI_1();
+	init_device_select_IO();
 	init_key();
-	init_test_LED();
+	//init_test_LED();
 	enable_irq();
+	
+	/* 设备选择 */
+	if (0 == DEVICE_SELECT_IO)
+	{
+		g_device_NO = WIFI_ADDRESS_DRAWBRIDGE;	/* 吊桥 */
+	}
+	else
+	{
+		g_device_NO = WIFI_ADDRESS_DRAHTBRIDGE;	/* 钢丝桥 */
+	}
 	
 	initLCD();
 	LCD_DISPLAY();
@@ -28,7 +39,7 @@ int main(void)
 	/* Loop forever */
 	for (;;)
 	{
-#if 0
+#if 1
 		/* 执行远程命令 */
 		if (REMOTE_FRAME_STATE_OK == g_remote_frame_state)
 		{
@@ -39,25 +50,27 @@ int main(void)
 #endif
 
 #if 1
+		/* 执行赛场网络控制命令 */
+		if (1 == g_net_control_data.is_new_cmd)
+		{
+			g_net_control_data.is_new_cmd = 0;
+			
+			execute_net_cmd(g_net_control_data.cmd);
+		}
+#endif
+
+#if 1
+		/* 桥回位 */
 		if (!K1)
 		{
-			D0 = 0;
-		}
-		if (!K2)
-		{
-			D0 = 1;
-		}
-		if (!K3)
-		{
-			D1 = 0;
-		}
-		if (!K4)
-		{
-			D1 = 1;
-		}
-		if (!K5)
-		{
-			D2 = ~D2;
+			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
+			{
+				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
+			}
+			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
+			{
+				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
+			}
 		}
 #endif
 		delay_ms(100);

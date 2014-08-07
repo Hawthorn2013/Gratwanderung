@@ -5,12 +5,7 @@
 #define PERIPH_SET_1_CLK_16M
 #define STEER_HELM_DATA (EMIOS_0.CH[9].CBDR.R)
 
-#define KEY1 (SIU.GPDI[48].B.PDI)
-#define KEY2 (SIU.GPDI[50].B.PDI)
-#define KEY3 (SIU.GPDI[52].B.PDI)
-#define KEY4 (SIU.GPDI[54].B.PDI)
-#define KEY5 (SIU.GPDI[56].B.PDI)
-
+#define DEVICE_SELECT_IO (SIU.GPDI[49].B.PDI)
 
 extern void init_modes_and_clock(void);
 extern void disable_watchdog(void);
@@ -25,6 +20,7 @@ extern void init_test_LED(void);
 
 
 extern void init_optical_encoder(void);
+extern void init_device_select_IO(void);
 void delay_us(DWORD us);
 void delay_ms(DWORD ms);
 
