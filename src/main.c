@@ -72,6 +72,40 @@ int main(void)
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
 			}
 		}
+		
+		if (!K3)
+		{
+			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
+			{
+				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
+			}
+			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
+			{
+				set_StepMotor((SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
+			}
+		}
+		if (!K4)
+		{
+			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
+			{
+				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);
+			}
+			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
+			{
+				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN_TEST);
+			}
+		}
+		if (!K5)
+		{
+			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
+			{
+				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);
+			}
+			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
+			{
+				set_StepMotor((SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN_TEST);
+			}
+		}
 #endif
 		delay_ms(100);
 	}
