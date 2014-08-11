@@ -17,11 +17,11 @@ int main(void)
 	//init_serial_port_3();
 	//init_optical_encoder();
 	init_DSPI_1();
-	init_device_select_IO();
+	//init_device_select_IO();
 	init_key();
 	//init_test_LED();
 	enable_irq();
-	
+#if 0	
 	/* …Ë±∏—°‘Ò */
 	if (0 == DEVICE_SELECT_IO)
 	{
@@ -31,7 +31,7 @@ int main(void)
 	{
 		g_device_NO = WIFI_ADDRESS_DRAHTBRIDGE;	/* ∏÷Àø«≈ */
 	}
-	
+#endif	
 	initLCD();
 	LCD_DISPLAY();
 	LCD_Fill(0x00);
