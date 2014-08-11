@@ -17,11 +17,11 @@ int main(void)
 	//init_serial_port_3();
 	//init_optical_encoder();
 	init_DSPI_1();
-	//init_device_select_IO();
+	init_device_select_IO();
 	init_key();
 	//init_test_LED();
 	enable_irq();
-#if 0	
+#if 1	
 	/* 设备选择 */
 	if (0 == DEVICE_SELECT_IO)
 	{
@@ -60,8 +60,8 @@ int main(void)
 #endif
 
 #if 1
-		/* 桥回位 */
-		if (!K1)
+		/* 桥测试 */
+		if (!K2)
 		{
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
@@ -72,7 +72,7 @@ int main(void)
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
 			}
 		}
-		
+		/*桥回位*/
 		if (!K3)
 		{
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
@@ -84,6 +84,7 @@ int main(void)
 				set_StepMotor((SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
 			}
 		}
+		/*K4 桥正微调*/
 		if (!K4)
 		{
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
@@ -95,6 +96,7 @@ int main(void)
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN_TEST);
 			}
 		}
+		/*K5桥负微调*/
 		if (!K5)
 		{
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)

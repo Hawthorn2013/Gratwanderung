@@ -257,13 +257,13 @@ void execute_net_cmd(WORD cmd)
 		case WIFI_CMD_NET_2_2 :	/* µõÇÅÉýÆð */
 		if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 		{
-			set_StepMotor(ZUNAMHE_DRAWBRIDGE_UP);
+			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
 		}
 		break;
 		case WIFI_CMD_NET_6_3 :	/* ¸ÖË¿ÇÅËúÏÝ */
 		if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
 		{
-			set_StepMotor(ZUNAMHE_DRAHTBRIDGE_DOWN);
+			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
 		}
 		break;
 	}
