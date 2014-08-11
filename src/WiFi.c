@@ -254,7 +254,7 @@ void execute_net_cmd(WORD cmd)
 {
 	switch (cmd)
 	{
-		case WIFI_CMD_NET_2_2 :	/* µõÇÅÉýÆð */
+		case WIFI_CMD_NET_3_2 :	/* µõÇÅÉýÆð */
 		if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 		{
 			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
@@ -266,6 +266,7 @@ void execute_net_cmd(WORD cmd)
 			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
 		}
 		break;
+		
 	}
 }
 
