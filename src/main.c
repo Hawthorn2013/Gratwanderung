@@ -64,12 +64,14 @@ int main(void)
 		}
 #endif
 		/*通知2、4启动*/
-		if(g_f_fly_bridge==1)
+		if(g_f_fly_bridge==1 && g_f_fly_bridge_wifi==1)
 		{
 			for(j=0;j<5;j++)
 				send_net_cmd(WIFI_ADDRESS_CAR_2,WIFI_CMD_NET_BRIDGE);
 			for(j=0;j<5;j++)
 				send_net_cmd(WIFI_ADDRESS_CAR_4,WIFI_CMD_NET_BRIDGE);
+			g_f_fly_bridge = 0;
+			g_f_fly_bridge_wifi=0;
 		}
 #if 1
 		/* 桥测试 */
@@ -90,10 +92,12 @@ int main(void)
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
+				g_f_drawbridge=0;
 			}
 			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
+				g_f_drahtbridge=0;
 			}
 		}
 		/*K4 桥正微调*/
