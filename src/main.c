@@ -1,9 +1,8 @@
 #include "includes.h"
 
-
 int main(void)
 {
-	int i = 0;
+	int i = 0,j = 0;
 	
 	disable_watchdog();
 	init_modes_and_clock();
@@ -58,7 +57,14 @@ int main(void)
 			execute_net_cmd(g_net_control_data.cmd);
 		}
 #endif
-
+		/*Í¨Öª2¡¢4Æô¶¯*/
+		if(g_f_fly_bridge==1)
+		{
+			for(j=0;j<5;j++)
+				send_net_cmd(WIFI_ADDRESS_CAR_2,WIFI_CMD_NET_BRIDGE);
+			for(j=0;j<5;j++)
+				send_net_cmd(WIFI_ADDRESS_CAR_4,WIFI_CMD_NET_BRIDGE);
+		}
 #if 1
 		/* ÇÅ²âÊÔ */
 		if (!K2)

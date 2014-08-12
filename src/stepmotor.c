@@ -1,6 +1,6 @@
 #define __STEPMOTOR_C_
 #include "includes.h"
-
+int g_f_fly_bridge = 0;
 
 void INTC_StepMotor_Counter_Matched(void);
 
@@ -85,7 +85,7 @@ void INTC_StepMotor_Counter_Matched(void)
 {
 	close_StepMotor();
 	data_StepMotor.is_OK = 1;
-	
+	g_f_fly_bridge=1;
 	EMIOS_0.CH[24].CSR.B.FLAG = 1;
 }
 

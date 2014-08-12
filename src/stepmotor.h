@@ -15,6 +15,7 @@ extern void close_StepMotor(void);
 extern void init_StepMotor_counter(void);
 extern void set_StepMotor(SDWORD site);
 
+extern int g_f_fly_bridge;
 
 /* StepMotor data */
 #ifdef __STEPMOTOR_C_
