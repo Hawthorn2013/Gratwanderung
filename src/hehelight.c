@@ -43,10 +43,10 @@ void init_hehelight(void)
 	SIU.GPDO[8].R = 0; 	/* 0=Ï¨Ãð */
 	SIU.GPDO[10].R = 0;
 	SIU.GPDO[11].R = 0;
-	SIU.GPDO[12].R = 0;
-	SIU.GPDO[13].R = 0;
-	SIU.GPDO[14].R = 0;
-	SIU.GPDO[15].R = 0;
+	SIU.GPDO[12].R = 1;  //D0~3 1Ãð0ÁÁ
+	SIU.GPDO[13].R = 1;
+	SIU.GPDO[14].R = 1;
+	SIU.GPDO[15].R = 1;
 	
 	SIU.GPDO[16].R = 0;	/* 0=Ï¨Ãð */
 	SIU.GPDO[17].R = 0;

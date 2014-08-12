@@ -1,8 +1,5 @@
 #include "includes.h"
 
-
-/* 许梓堆到此一游 */ 
-
 int main(void)
 {
 	int i = 0,j = 0;
@@ -126,13 +123,13 @@ int main(void)
 		}
 #endif
 		
-		hehelighton();
+		//hehelighton();
 		
-		delay_ms(50);
+		//delay_ms(50);
 		
-		hehelightoff();
+		//hehelightoff();
 		
-		delay_ms(50);
+		//delay_ms(50);
 	}
 }
 
