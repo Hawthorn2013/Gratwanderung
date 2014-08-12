@@ -58,12 +58,14 @@ int main(void)
 		}
 #endif
 		/*Í¨Öª2¡¢4Æô¶¯*/
-		if(g_f_fly_bridge==1)
+		if(g_f_fly_bridge==1 && g_f_fly_bridge_wifi==1)
 		{
 			for(j=0;j<5;j++)
 				send_net_cmd(WIFI_ADDRESS_CAR_2,WIFI_CMD_NET_BRIDGE);
 			for(j=0;j<5;j++)
 				send_net_cmd(WIFI_ADDRESS_CAR_4,WIFI_CMD_NET_BRIDGE);
+			g_f_fly_bridge = 0;
+			g_f_fly_bridge_wifi=0;
 		}
 #if 1
 		/* ÇÅ²âÊÔ */
