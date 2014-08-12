@@ -1,7 +1,7 @@
 #include "includes.h"
 
 
-/* 许梓堆到此一游 */
+/* 许梓堆到此一游 */ 
 
 int main(void)
 {
@@ -11,6 +11,7 @@ int main(void)
 	init_modes_and_clock();
 	init_pit();
 	init_led();
+	init_hehelight();
 	init_EMIOS_0_StepMotor();
 	init_StepMotor_counter();
 	init_serial_port_0();
@@ -23,6 +24,8 @@ int main(void)
 	init_key();
 	//init_test_LED();
 	enable_irq();
+	
+	
 #if 1	
 	/* 设备选择 */
 	if (0 == DEVICE_SELECT_IO)
@@ -118,7 +121,14 @@ int main(void)
 			}
 		}
 #endif
-		delay_ms(100);
+		
+		hehelighton();
+		
+		delay_ms(50);
+		
+		hehelightoff();
+		
+		delay_ms(50);
 	}
 }
 
