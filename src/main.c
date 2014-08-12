@@ -78,10 +78,12 @@ int main(void)
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
+				g_f_drawbridge=0;
 			}
 			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
+				g_f_drahtbridge=0;
 			}
 		}
 		/*K4 ÇÅÕýÎ¢µ÷*/
