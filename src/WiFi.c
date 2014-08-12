@@ -260,16 +260,12 @@ void execute_net_cmd(WORD cmd)
 		case WIFI_CMD_NET_3_2 :	/* µõÇÅÉýÆð */
 		if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 		{
-<<<<<<< HEAD
 			if(g_f_drawbridge==0)
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
-				g_f_drawbridge=1;	
-			}	
-=======
-			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
-			g_f_fly_bridge_wifi=1;
->>>>>>> 61e4e904907b113f7525635a6e788d604bcc5128
+				g_f_drawbridge=1;
+				g_f_fly_bridge_wifi=1;	
+			}
 		}
 		break;
 		
