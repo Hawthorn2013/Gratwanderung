@@ -1,9 +1,11 @@
 #include "includes.h"
 
 
+/* 许梓堆到此一游 */
+
 int main(void)
 {
-	int i = 0;
+	int i = 0,j = 0;
 	
 	disable_watchdog();
 	init_modes_and_clock();
@@ -58,7 +60,16 @@ int main(void)
 			execute_net_cmd(g_net_control_data.cmd);
 		}
 #endif
-
+		/*通知2、4启动*/
+		if(g_f_fly_bridge==1 && g_f_fly_bridge_wifi==1)
+		{
+			for(j=0;j<5;j++)
+				send_net_cmd(WIFI_ADDRESS_CAR_2,WIFI_CMD_NET_BRIDGE);
+			for(j=0;j<5;j++)
+				send_net_cmd(WIFI_ADDRESS_CAR_4,WIFI_CMD_NET_BRIDGE);
+			g_f_fly_bridge = 0;
+			g_f_fly_bridge_wifi=0;
+		}
 #if 1
 		/* 桥测试 */
 		if (!K2)

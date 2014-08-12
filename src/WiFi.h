@@ -103,5 +103,5 @@ extern void generate_remote_frame_2(BYTE scr, BYTE des, WORD cmd, BYTE length, c
 //extern void generate_remote_net_frame_to_send_site(WORD cmd, DWORD site, BYTE data[]);
 extern void execute_net_cmd(WORD cmd);
 
-
+extern int g_f_fly_bridge_wifi;
 #endif

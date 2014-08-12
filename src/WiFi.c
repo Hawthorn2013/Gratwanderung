@@ -4,6 +4,7 @@
 int g_f_drawbridge=0;
 int g_f_drahtbridge=0;
 
+int g_f_fly_bridge_wifi=0;
 int g_remote_frame_state = REMOTE_FRAME_STATE_NOK;
 int g_remote_frame_cnt = 0;
 BYTE remote_frame_data[REMOTE_FRAME_LENGTH];
@@ -230,7 +231,7 @@ void generate_remote_frame_2(BYTE scr, BYTE des, WORD cmd, BYTE length, const BY
 	{
 		remote_frame_data_send[i++] = data[j];
 	}
-	remote_frame_data_send[i++] = check_sum(remote_frame_data_send+2, i-3);
+	remote_frame_data_send[i++] = check_sum(remote_frame_data_send+2, i-2);
 	for (; i < REMOTE_FRAME_LENGTH; i++)	/* 清空未使用区域 */
 	{
 		remote_frame_data_send[i] = 0x00;
@@ -259,11 +260,16 @@ void execute_net_cmd(WORD cmd)
 		case WIFI_CMD_NET_3_2 :	/* 吊桥升起 */
 		if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 		{
+<<<<<<< HEAD
 			if(g_f_drawbridge==0)
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
 				g_f_drawbridge=1;	
 			}	
+=======
+			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
+			g_f_fly_bridge_wifi=1;
+>>>>>>> 61e4e904907b113f7525635a6e788d604bcc5128
 		}
 		break;
 		
