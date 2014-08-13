@@ -7,7 +7,7 @@ DWORD g_time_basis_PIT = 0x00000000;	/* 时间基准 */
 
 
 /*-----------------------------------------------------------------------*/
-/* PIT中断处理函数                                                       */
+/* PIT中断处理函数                                                                  */
 /*-----------------------------------------------------------------------*/
 void PitISR(void)
 {
@@ -16,7 +16,8 @@ void PitISR(void)
 	g_f_pit = 1;
 	
 	g_time_basis_PIT++;	/* 计时 */
-	
+
+#if 0
 	if(g_f_D_start==1)
 	{
 		if(HHL[0].bright==0)
@@ -93,6 +94,7 @@ void PitISR(void)
 		}
 		
 	}
+#endif
 
 #if 0
 	/* control StepMotor */
@@ -127,6 +129,10 @@ void PitISR(void)
 		}
 	}
 #endif
+
+	/* 呵呵灯控制 */
+	contorl_HHLs();
+	
 	PIT.CH[1].TFLG.B.TIF = 1;	// MPC56xxB/P/S: Clear PIT 1 flag by writing 1 
 }
 
