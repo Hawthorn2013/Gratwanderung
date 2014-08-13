@@ -26,10 +26,24 @@
 #define HHL_19 (SIU.GPDO[33].B.PDO)
 #define HHL_20 (SIU.GPDO[35].B.PDO)
 
+#define HHL_PWM_1 (EMIOS_0.CH[1].CBDR.R)
+#define HHL_PWM_2 (EMIOS_0.CH[2].CBDR.R)
+#define HHL_PWM_3 (EMIOS_0.CH[3].CBDR.R)
+#define HHL_PWM_4 (EMIOS_0.CH[4].CBDR.R)
+#define HHL_PWM_5 (EMIOS_0.CH[5].CBDR.R)
+#define HHL_PWM_6 (EMIOS_0.CH[6].CBDR.R)
+#define HHL_PWM_7 (EMIOS_0.CH[7].CBDR.R)
+#define HHL_PWM_10 (EMIOS_0.CH[10].CBDR.R)
+#define HHL_PWM_11 (EMIOS_0.CH[11].CBDR.R)
+#define HHL_PWM_12 (EMIOS_0.CH[12].CBDR.R)
+#define HHL_PWM_13 (EMIOS_0.CH[13].CBDR.R)
+#define HHL_PWM_14 (EMIOS_0.CH[14].CBDR.R)
+#define HHL_PWM_15 (EMIOS_0.CH[15].CBDR.R)
 
 extern void init_hehelight(void);
 extern void hehelighton(void);
 extern void hehelightoff(void);
+extern void init_hehelight_PWM(void);
 
 
 #endif
