@@ -8,62 +8,16 @@ int main(void)
 	init_modes_and_clock();
 	init_pit();
 	init_led();
-	//init_hehelight();
 	init_EMIOS_0_StepMotor();
 	init_StepMotor_counter();
 	init_hehelight_PWM();
 	init_serial_port_0();
 	init_serial_port_1();
-	//init_serial_port_2();
-	//init_serial_port_3();
-	//init_optical_encoder();
 	init_DSPI_1();
 	init_device_select_IO();
 	init_key();
-	//init_test_LED();
 	enable_irq();
-#if 1
-	while (1)
-	{
-		for (i = 0; i < 2500; i++)
-		{
-			HHL_PWM_1 = i;
-			HHL_PWM_2 = i;
-			HHL_PWM_3 = i;
-			HHL_PWM_4 = i;
-			HHL_PWM_5 = i;
-			HHL_PWM_6 = i;
-			HHL_PWM_7 = i;
-			HHL_PWM_10 = i;
-			HHL_PWM_11= i;
-			HHL_PWM_12 = i;
-			HHL_PWM_13 = i;
-			HHL_PWM_14 = i;
-			HHL_PWM_15 = i;
-			
-			delay_us(100);
-		}
-		for (i = 2500; i >= 0; i--)
-		{
-			HHL_PWM_1 = i;
-			HHL_PWM_2 = i;
-			HHL_PWM_3 = i;
-			HHL_PWM_4 = i;
-			HHL_PWM_5 = i;
-			HHL_PWM_6 = i;
-			HHL_PWM_7 = i;
-			HHL_PWM_10 = i;
-			HHL_PWM_11= i;
-			HHL_PWM_12 = i;
-			HHL_PWM_13 = i;
-			HHL_PWM_14 = i;
-			HHL_PWM_15 = i;
-			
-			delay_us(200);
-		}
-	}
-#endif
-
+	
 #if 1
 	/* …Ë±∏—°‘Ò */
 	if (0 == DEVICE_SELECT_IO)

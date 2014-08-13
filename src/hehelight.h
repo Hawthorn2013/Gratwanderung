@@ -3,29 +3,7 @@
 #ifndef __HEHELIGHT_H__
 #define __HEHELIGHT_H__
 
-
-#define HHL_0 (SIU.GPDO[0].B.PDO)
-#define HHL_1 (SIU.GPDO[1].B.PDO)
-#define HHL_2 SIU.GPDO[2].B.PDO()
-#define HHL_3 (SIU.GPDO[4].B.PDO)
-#define HHL_4 (SIU.GPDO[5].B.PDO)
-#define HHL_5 (SIU.GPDO[6].B.PDO)
-#define HHL_6 (SIU.GPDO[7].B.PDO)
-#define HHL_7 (SIU.GPDO[8].B.PDO)
-#define HHL_8 (SIU.GPDO[10].B.PDO)
-#define HHL_9 (SIU.GPDO[11].B.PDO)
-#define HHL_10 (SIU.GPDO[16].B.PDO)
-#define HHL_11 (SIU.GPDO[17].B.PDO)
-#define HHL_12 (SIU.GPDO[26].B.PDO)
-#define HHL_13 (SIU.GPDO[27].B.PDO)
-#define HHL_14 (SIU.GPDO[28].B.PDO)
-#define HHL_15 (SIU.GPDO[29].B.PDO)
-#define HHL_16 (SIU.GPDO[30].B.PDO)
-#define HHL_17 (SIU.GPDO[31].B.PDO)
-#define HHL_18 (SIU.GPDO[32].B.PDO)
-#define HHL_19 (SIU.GPDO[33].B.PDO)
-#define HHL_20 (SIU.GPDO[35].B.PDO)
-
+/* 0灭-2500最亮 */
 #define HHL_PWM_1 (EMIOS_0.CH[1].CBDR.R)
 #define HHL_PWM_2 (EMIOS_0.CH[2].CBDR.R)
 #define HHL_PWM_3 (EMIOS_0.CH[3].CBDR.R)
@@ -33,16 +11,43 @@
 #define HHL_PWM_5 (EMIOS_0.CH[5].CBDR.R)
 #define HHL_PWM_6 (EMIOS_0.CH[6].CBDR.R)
 #define HHL_PWM_7 (EMIOS_0.CH[7].CBDR.R)
+/* 无8-9 */
 #define HHL_PWM_10 (EMIOS_0.CH[10].CBDR.R)
 #define HHL_PWM_11 (EMIOS_0.CH[11].CBDR.R)
 #define HHL_PWM_12 (EMIOS_0.CH[12].CBDR.R)
 #define HHL_PWM_13 (EMIOS_0.CH[13].CBDR.R)
 #define HHL_PWM_14 (EMIOS_0.CH[14].CBDR.R)
 #define HHL_PWM_15 (EMIOS_0.CH[15].CBDR.R)
+#define HHL_PWM_16 (EMIOS_0.CH[16].CBDR.R)
+#define HHL_PWM_17 (EMIOS_0.CH[17].CBDR.R)
+#define HHL_PWM_18 (EMIOS_0.CH[18].CBDR.R)
+/* 无19 */
+#define HHL_PWM_20 (EMIOS_0.CH[20].CBDR.R)
+#define HHL_PWM_21 (EMIOS_0.CH[21].CBDR.R)
+#define HHL_PWM_22 (EMIOS_0.CH[22].CBDR.R)
 
-extern void init_hehelight(void);
-extern void hehelighton(void);
-extern void hehelightoff(void);
+#define HHL_1_1 HHL_PWM_1
+#define HHL_1_2 HHL_PWM_2
+#define HHL_1_3 HHL_PWM_3
+#define HHL_1_4 HHL_PWM_4
+#define HHL_1_5 HHL_PWM_5
+#define HHL_1_6 HHL_PWM_6
+#define HHL_1_7 HHL_PWM_7
+#define HHL_2_1 HHL_PWM_10
+#define HHL_2_2 HHL_PWM_11
+#define HHL_2_3 HHL_PWM_12
+#define HHL_2_4 HHL_PWM_13
+#define HHL_2_5 HHL_PWM_14
+#define HHL_2_6 HHL_PWM_15
+#define HHL_2_7 HHL_PWM_16
+#define HHL_3_1 HHL_PWM_17
+#define HHL_3_2 HHL_PWM_18
+#define HHL_3_3 HHL_PWM_20
+#define HHL_3_4 HHL_PWM_21
+#define HHL_3_5 HHL_PWM_22
+/* 无3_6-3_7 */
+
+
 extern void init_hehelight_PWM(void);
 
 
