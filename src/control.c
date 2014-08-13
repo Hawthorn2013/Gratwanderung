@@ -12,10 +12,88 @@ DWORD g_time_basis_PIT = 0x00000000;	/* 时间基准 */
 void PitISR(void)
 {
 	SDWORD stepMorotZunamhe = 0;
-	
+	int i=0;
 	g_f_pit = 1;
 	
 	g_time_basis_PIT++;	/* 计时 */
+	
+	if(g_f_D_start==1)
+	{
+		if(HHL[0].bright==0)
+		{
+			if(i<=2500)	
+			*(HHL[0].light)=i++;
+			if(i>2500)
+			*(HHL[0].light)=--i;
+		}
+		if(HHL[0].bright==1)
+		{
+			if((i+100)<=2500)	
+			{
+				*(HHL[0].light)=(i+100);
+				i+=100;
+			}
+			if((i+100)>2500)
+			{
+				*(HHL[0].light)=(i-100);
+				i-=100;
+			}
+		}
+		
+	}
+	
+	if(g_f_G_start==1)
+	{
+		if(HHL[3].bright==0)
+		{
+			if(i<=2500)	
+			*(HHL[3].light)=i++;
+			if(i>2500)
+			*(HHL[3].light)=--i;
+		}
+		
+		if(HHL[3].bright==1)
+		{
+			if((i+100)<=2500)	
+			{
+				*(HHL[3].light)=(i+100);
+				i+=100;
+			}
+			if((i+100)>2500)
+			{
+				*(HHL[3].light)=(i-100);
+				i-=100;
+			}
+		}
+		
+	}
+	
+	if(g_f_X_start==1)
+	{
+		if(HHL[6].bright==0)
+		{
+			if(i<=2500)	
+			*(HHL[6].light)=i++;
+			if(i>2500)
+			*(HHL[6].light)=--i;
+		}
+		
+		if(HHL[3].bright==1)
+		{
+			if((i+100)<=2500)	
+			{
+				*(HHL[6].light)=(i+100);
+				i+=100;
+			}
+			if((i+100)>2500)
+			{
+				*(HHL[6].light)=(i-100);
+				i-=100;
+			}
+		}
+		
+	}
+
 #if 0
 	/* control StepMotor */
 	stepMorotZunamhe = (WORD)EMIOS_0.CH[24].CCNTR.R;

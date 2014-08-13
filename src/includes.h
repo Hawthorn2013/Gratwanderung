@@ -53,6 +53,7 @@ typedef unsigned short word;
 #include "UART.h"
 #include "stepmotor.h"
 #include "hehelight.h"
+#include "heheaction.h"
 
 
 ///****************LED****************///
