@@ -52,6 +52,8 @@ typedef unsigned short word;
 #include "WiFi.h"
 #include "UART.h"
 #include "stepmotor.h"
+#include "hehelight.h"
+
 
 ///****************LED****************///
 #if 1
