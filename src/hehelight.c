@@ -305,6 +305,7 @@ void contorl_HHL(HHL_Light_Data *hhl)
 		if (now_lightness <= HHL_PWM_MIN + hhl->zunahme)
 		{
 			now_lightness = HHL_PWM_MIN;
+			hhl->is_increasing=TRUE;
 		}
 		else
 		{

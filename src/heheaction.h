@@ -2,6 +2,7 @@
 #define __HEHEACTION_H__
 
 #define MAX (2500)
+#define MID (1500)
 #define MIN (0)
 
 /* µÆ19¿ÚÊý¾Ý */
