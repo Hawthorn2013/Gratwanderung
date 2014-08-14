@@ -11,7 +11,7 @@ static void contorl_HHL(HHL_Light_Data *hhl);
 
 
 /*-----------------------------------------------------------------------*/
-/* 初始化赛道灯                                                                      */
+/* 初始化赛道灯PWM                                                   */
 /*-----------------------------------------------------------------------*/
 void init_hehelight_PWM(void)
 {
@@ -229,6 +229,19 @@ void init_hehelight_PWM(void)
 	}
 }
 
+void init_HHL(void)
+{
+	HHL_1_1=MIN;
+	HHL_1_2=MIN;
+	HHL_1_3=MIN;
+	HHL_2_1=MIN;
+	HHL_2_2=MIN;
+	HHL_2_3=MIN;
+	HHL_3_1=MIN;
+	HHL_3_2=MIN;
+	HHL_3_3=MIN;
+	init_hehelight_PWM();	
+}
 
 /*-----------------------------------------------------------------------*/
 /* 设置呵呵灯                                                                         */

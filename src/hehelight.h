@@ -64,6 +64,7 @@ typedef struct
 }HHL_Light_Data;
 
 extern HHL_Light_Data (HHL_light_datas[4][8]);
+extern void init_HHL(void);
 
 extern void init_hehelight_PWM(void);
 extern void contorl_HHLs(void);

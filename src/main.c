@@ -10,13 +10,15 @@ int main(void)
 	init_led();
 	init_EMIOS_0_StepMotor();
 	init_StepMotor_counter();
-	init_hehelight_PWM();
+	init_HHL();
+	//ALL_HEHE_FLASHMOB();
 	init_serial_port_0();
 	init_serial_port_1();
 	init_DSPI_1();
 	init_device_select_IO();
 	init_key();
 	enable_irq();
+	
 	
 #if 1
 	/* 设备选择 */
@@ -29,10 +31,11 @@ int main(void)
 		g_device_NO = WIFI_ADDRESS_DRAHTBRIDGE;	/* 钢丝桥 */
 	}
 #endif	
-	//initLCD();
-	//LCD_DISPLAY();
-	//LCD_Fill(0x00);
-	
+	/*initLCD();
+	LCD_DISPLAY();
+	LCD_Fill(0x00);*/
+	//HHL_1_1=2500;
+	//HHL_3_1=2500;
 	/* Loop forever */
 	for (;;)
 	{
@@ -102,9 +105,9 @@ int main(void)
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);
 			}
 			else if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
-			{
+			{}
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN_TEST);
-			}
+			
 		}
 		/*K5桥负微调*/
 		if (!K5)
@@ -120,13 +123,6 @@ int main(void)
 		}
 #endif
 		
-		//hehelighton();
-		
-		//delay_ms(50);
-		
-		//hehelightoff();
-		
-		//delay_ms(50);
 		
 	}
 }
