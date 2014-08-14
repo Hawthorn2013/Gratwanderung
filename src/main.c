@@ -46,7 +46,7 @@ int main(void)
 		}
 #endif
 
-#if 1
+#if 0
 		/* 执行赛场网络控制命令 */
 		if (1 == g_net_control_data.is_new_cmd)
 		{
@@ -55,6 +55,8 @@ int main(void)
 			execute_net_cmd(g_net_control_data.cmd);
 		}
 #endif
+		all_action_control();
+		
 		/*通知2、4启动*/
 		if(g_f_fly_bridge==1 && g_f_fly_bridge_wifi==1)
 		{

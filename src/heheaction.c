@@ -8,15 +8,24 @@ int g_f_G_double=0;
 
 void init_HHL(void)
 {
-	*(HHL[0].light)=HHL_1_1;
-	*(HHL[1].light)=HHL_1_2;
-	*(HHL[2].light)=HHL_1_3;
-	*(HHL[3].light)=HHL_2_1;
-	*(HHL[4].light)=HHL_2_2;
-	*(HHL[5].light)=HHL_2_3;
-	*(HHL[6].light)=HHL_3_1;
-	*(HHL[7].light)=HHL_3_2;
-	*(HHL[8].light)=HHL_3_3;
+	/**(HHL[0].light)=&HHL_1_1;
+	*(HHL[1].light)=&HHL_1_2;
+	*(HHL[2].light)=&HHL_1_3;
+	*(HHL[3].light)=&HHL_2_1;
+	*(HHL[4].light)=&HHL_2_2;
+	*(HHL[5].light)=&HHL_2_3;
+	*(HHL[6].light)=&HHL_3_1;
+	*(HHL[7].light)=&HHL_3_2;
+	*(HHL[8].light)=&HHL_3_3;*/
+	HHL[0].light=&HHL_1_1;
+	HHL[1].light=&HHL_1_2;
+	HHL[2].light=&HHL_1_3;
+	HHL[3].light=&HHL_2_1;
+	HHL[4].light=&HHL_2_2;
+	HHL[5].light=&HHL_2_3;
+	HHL[6].light=&HHL_3_1;
+	HHL[7].light=&HHL_3_2;
+	HHL[8].light=&HHL_3_3;
 }
 
 void ALL_HEHE_FLASHMOB(void)	/*¿ª³¡¿ìÉÁ*/
@@ -101,5 +110,26 @@ void WIFI_X_action(WORD cmd)
 	{
 		delay_ms(300);
 		g_f_X_start=1;		/*ºôÎüµÆ*/
+	}
+}
+
+void all_action_control(void)
+{
+	if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
+	{
+		if (g_net_control_data.is_new_cmd)
+		{
+			g_net_control_data.is_new_cmd = 0;	
+			WIFI_D_action(g_net_control_data.cmd);
+			WIFI_X_action(g_net_control_data.cmd);
+		}
+	}
+	if (WIFI_ADDRESS_DRAHTBRIDGE == g_device_NO)
+	{
+		if (g_net_control_data.is_new_cmd)
+		{
+			g_net_control_data.is_new_cmd = 0;	
+			WIFI_G_action(g_net_control_data.cmd);
+		}
 	}
 }
