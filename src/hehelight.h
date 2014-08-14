@@ -7,6 +7,8 @@
 #define HHL_PWM_MAX (2500)
 #define HHL_PWM_MIN (0)
 
+
+
 /* 0灭-2500最亮 */
 #define HHL_PWM_1 (EMIOS_0.CH[1].CBDR.R)
 #define HHL_PWM_2 (EMIOS_0.CH[2].CBDR.R)
@@ -60,10 +62,13 @@ typedef struct
 	BYTE is_increasing;	/* 亮度正在增加标志位 */
 }HHL_Light_Data;
 
+extern HHL_Light_Data (HHL_light_datas[4][8]);
 
 extern void init_hehelight_PWM(void);
 extern void contorl_HHLs(void);
 extern void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD original_lightness);
+extern void close_HHL(HHL_Light_Data* hhl);
+
 
 
 #endif

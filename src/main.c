@@ -29,9 +29,12 @@ int main(void)
 		g_device_NO = WIFI_ADDRESS_DRAHTBRIDGE;	/* ¸ÖË¿ÇÅ */
 	}
 #endif	
-	initLCD();
-	LCD_DISPLAY();
-	LCD_Fill(0x00);
+	//initLCD();
+	//LCD_DISPLAY();
+	//LCD_Fill(0x00);
+	
+	set_HHL_mode(&(HHL_light_datas[1][1]),1,TRUE,HHL_PWM_MIN);
+	delay_ms(3000);	close_HHL(&(HHL_light_datas[1][1]));
 	
 	/* Loop forever */
 	for (;;)
@@ -55,7 +58,7 @@ int main(void)
 			execute_net_cmd(g_net_control_data.cmd);
 		}
 #endif
-		all_action_control();
+		//all_action_control();
 		
 		/*Í¨Öª2¡¢4Æô¶¯*/
 		if(g_f_fly_bridge==1 && g_f_fly_bridge_wifi==1)

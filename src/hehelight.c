@@ -235,6 +235,7 @@ void init_hehelight_PWM(void)
 /* zunahme 每次在PIT中增加的亮度                                           */
 /* is_increasing 亮度变化方向                                                   */
 /* original_lightness 起始亮度                                                  */
+/* &(HHL_light_datas[2][4])                                       */
 /*-----------------------------------------------------------------------*/
 void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD original_lightness)
 {
@@ -242,6 +243,12 @@ void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD o
 	hhl->is_increasing = is_increasing;
 	*(hhl->pLightness) = original_lightness;
 	hhl->enable = TRUE;
+}
+
+void close_HHL(HHL_Light_Data* hhl)
+{
+	hhl->enable=FALSE;
+	*(hhl->pLightness)=HHL_PWM_MIN;
 }
 
 
@@ -269,7 +276,7 @@ void contorl_HHLs(void)
 /*-----------------------------------------------------------------------*/
 void contorl_HHL(HHL_Light_Data *hhl)
 {
-	DWORD now_lightness = *(hhl->pLightness);
+	DWORD now_lightness = *(hhl->pLightness);/////////
 	
 	if (TRUE == hhl->is_increasing)
 	{
@@ -282,6 +289,7 @@ void contorl_HHL(HHL_Light_Data *hhl)
 	}
 	else
 	{
+		now_lightness-=hhl->zunahme;
 		if (now_lightness <= HHL_PWM_MIN + hhl->zunahme)
 		{
 			now_lightness = HHL_PWM_MIN;
