@@ -1,7 +1,7 @@
 #ifndef __STEPMOTOR_H__
 #define __STEPMOTOR_H__
 
-#define ZUNAMHE_DRAWBRIDGE_UP (5000)	/* ต๕วลษýฦ๐พเภ๋ */
+#define ZUNAMHE_DRAWBRIDGE_UP (4700)	/* ต๕วลษýฦ๐พเภ๋ */
 #define ZUNAMHE_DRAWBRIDGE_UP_TEST (200)   //ฒโสิฒนึต
 #define ZUNAMHE_DRAHTBRIDGE_DOWN (4800)	/* ธึหฟวลต๘ยไพเภ๋ */
 #define ZUNAMHE_DRAHTBRIDGE_DOWN_TEST (200)   //ฒโสิฒนึต

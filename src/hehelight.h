@@ -60,6 +60,7 @@ typedef struct
 	BYTE enable;	/* 使能位 */
 	WORD zunahme;	/* 每次进入PIT中断PWM占空比寄存器增量，越大灯变化越快 */
 	BYTE is_increasing;	/* 亮度正在增加标志位 */
+	BYTE g_f_close;		/*渐灭标志位*/
 }HHL_Light_Data;
 
 extern HHL_Light_Data (HHL_light_datas[4][8]);

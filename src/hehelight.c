@@ -225,6 +225,7 @@ void init_hehelight_PWM(void)
 	for (i = 0; i < 4 * 8; i++)
 	{
 		((HHL_Light_Data *)HHL_light_datas)[i].enable = FALSE;
+		((HHL_Light_Data *)HHL_light_datas)[i].g_f_close = FALSE;
 	}
 }
 
@@ -243,15 +244,16 @@ void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD o
 	hhl->is_increasing = is_increasing;
 	*(hhl->pLightness) = original_lightness;
 	hhl->enable = TRUE;
+	hhl->g_f_close=FALSE;
 }
+/*-----------------------------------------------------------------------*/
+/* ºôÎüµÆ½¥Í£                                                                 */                                                                      
+/*-----------------------------------------------------------------------*/
 
-void close_HHL(HHL_Light_Data* hhl)
+void close_HHL(HHL_Light_Data *hhl)
 {
-	hhl->enable=FALSE;
-	*(hhl->pLightness)=HHL_PWM_MIN;
+	hhl->g_f_close=TRUE;	
 }
-
-
 /*-----------------------------------------------------------------------*/
 /* ¿ØÖÆºÇºÇµÆ                                                                         */
 /* ÔÚPITÖÐµ÷ÓÃ                                                                        */
@@ -277,8 +279,18 @@ void contorl_HHLs(void)
 void contorl_HHL(HHL_Light_Data *hhl)
 {
 	DWORD now_lightness = *(hhl->pLightness);/////////
-	
-	if (TRUE == hhl->is_increasing)
+	if(TRUE==hhl->g_f_close)
+	{
+		if(now_lightness<=HHL_PWM_MIN+hhl->zunahme)
+		{
+			now_lightness=HHL_PWM_MIN;		
+			hhl->enable=FALSE;
+			hhl->g_f_close=FALSE;
+		}
+		else
+		now_lightness-=hhl->zunahme;
+	}
+	else if (FALSE==hhl->g_f_close&&TRUE == hhl->is_increasing)
 	{
 		now_lightness += hhl->zunahme;
 		if (HHL_PWM_MAX <= now_lightness)
@@ -287,13 +299,12 @@ void contorl_HHL(HHL_Light_Data *hhl)
 			hhl->is_increasing = FALSE;
 		}
 	}
-	else
+	else if(FALSE==hhl->g_f_close&&FALSE == hhl->is_increasing)
 	{
-		now_lightness-=hhl->zunahme;
+		//now_lightness-=hhl->zunahme;
 		if (now_lightness <= HHL_PWM_MIN + hhl->zunahme)
 		{
 			now_lightness = HHL_PWM_MIN;
-			hhl->is_increasing = TRUE;
 		}
 		else
 		{
@@ -301,4 +312,5 @@ void contorl_HHL(HHL_Light_Data *hhl)
 		}
 	}
 	*(hhl->pLightness) = now_lightness;
+
 }

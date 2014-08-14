@@ -33,8 +33,9 @@ int main(void)
 	//LCD_DISPLAY();
 	//LCD_Fill(0x00);
 	
-	set_HHL_mode(&(HHL_light_datas[1][1]),1,TRUE,HHL_PWM_MIN);
-	delay_ms(3000);	close_HHL(&(HHL_light_datas[1][1]));
+	set_HHL_mode(&(HHL_light_datas[1][1]),20,TRUE,HHL_PWM_MIN);
+	//delay_ms(2000);
+	//close_HHL(&(HHL_light_datas[1][1]));
 	
 	/* Loop forever */
 	for (;;)
