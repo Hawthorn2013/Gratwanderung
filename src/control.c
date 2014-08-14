@@ -17,84 +17,7 @@ void PitISR(void)
 	
 	g_time_basis_PIT++;	/* ¼ÆÊ± */
 
-#if 0
-	if(g_f_D_start==1)
-	{
-		if(HHL[0].bright==0)
-		{
-			if(i<=2500)	
-			*(HHL[0].light)=i++;
-			if(i>2500)
-			*(HHL[0].light)=--i;
-		}
-		if(HHL[0].bright==1)
-		{
-			if((i+100)<=2500)	
-			{
-				*(HHL[0].light)=(i+100);
-				i+=100;
-			}
-			if((i+100)>2500)
-			{
-				*(HHL[0].light)=(i-100);
-				i-=100;
-			}
-		}
-		
-	}
-	
-	if(g_f_G_start==1)
-	{
-		if(HHL[3].bright==0)
-		{
-			if(i<=2500)	
-			*(HHL[3].light)=i++;
-			if(i>2500)
-			*(HHL[3].light)=--i;
-		}
-		
-		if(HHL[3].bright==1)
-		{
-			if((i+100)<=2500)	
-			{
-				*(HHL[3].light)=(i+100);
-				i+=100;
-			}
-			if((i+100)>2500)
-			{
-				*(HHL[3].light)=(i-100);
-				i-=100;
-			}
-		}
-		
-	}
-	
-	if(g_f_X_start==1)
-	{
-		if(HHL[6].bright==0)
-		{
-			if(i<=2500)	
-			*(HHL[6].light)=i++;
-			if(i>2500)
-			*(HHL[6].light)=--i;
-		}
-		
-		if(HHL[3].bright==1)
-		{
-			if((i+100)<=2500)	
-			{
-				*(HHL[6].light)=(i+100);
-				i+=100;
-			}
-			if((i+100)>2500)
-			{
-				*(HHL[6].light)=(i-100);
-				i-=100;
-			}
-		}
-		
-	}
-#endif
+
 
 #if 0
 	/* control StepMotor */
@@ -132,6 +55,7 @@ void PitISR(void)
 
 	/* ºÇºÇµÆ¿ØÖÆ */
 	contorl_HHLs();
+	control_HHL_flows();
 	
 	PIT.CH[1].TFLG.B.TIF = 1;	// MPC56xxB/P/S: Clear PIT 1 flag by writing 1 
 }

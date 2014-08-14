@@ -103,6 +103,25 @@ void WIFI_X_action(WORD cmd)
 	}
 }
 
+void WIFI_W_action(WORD cmd)
+{
+	int i=0;
+	if(WIFI_CMD_NET_4_1==cmd)
+	{
+		for(i=3;i<8;i++)
+		{
+			set_HHL_mode(&(HHL_light_datas[2][i]),30,TRUE,HHL_PWM_MIN);
+		}
+	}
+	if(WIFI_CMD_NET_4_2==cmd)
+	{
+		for(i=3;i<8;i++)
+		{
+			close_HHL(&(HHL_light_datas[2][i]));
+			enable_HHL_flow(&(HHL_flow_datas[i-3]));
+		}
+	}
+}
 void all_action_control(void)
 {
 	if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)

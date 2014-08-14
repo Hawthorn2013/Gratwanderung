@@ -5,7 +5,13 @@
 
 
 HHL_Light_Data HHL_light_datas[4][8];
+HHL_flow_data HHL_flow_datas[5];
+int FLOW[5]=
+{
+	1,0,0,0,0
+};
 
+int flow_count=0;
 
 static void contorl_HHL(HHL_Light_Data *hhl);
 
@@ -222,10 +228,22 @@ void init_hehelight_PWM(void)
 	HHL_light_datas[3][4].pLightness = &HHL_3_4;
 	HHL_light_datas[3][5].pLightness = &HHL_3_5;
 	
+	HHL_flow_datas[0].light = &HHL_2_3;
+	HHL_flow_datas[1].light = &HHL_2_4;
+	HHL_flow_datas[2].light = &HHL_2_5;
+	HHL_flow_datas[3].light = &HHL_2_6;
+	HHL_flow_datas[4].light = &HHL_2_7;
+	
 	for (i = 0; i < 4 * 8; i++)
 	{
 		((HHL_Light_Data *)HHL_light_datas)[i].enable = FALSE;
 		((HHL_Light_Data *)HHL_light_datas)[i].g_f_close = FALSE;
+		((HHL_Light_Data *)HHL_light_datas)[i].g_f_flow = FALSE;
+	}
+	for(i=0;i<5;i++)
+	{
+		((HHL_flow_data *)HHL_flow_datas)[i].enable = FALSE;
+		((HHL_flow_data *)HHL_flow_datas)[i].g_f_flow = i;
 	}
 }
 
@@ -243,6 +261,73 @@ void init_HHL(void)
 	init_hehelight_PWM();	
 }
 
+
+/*-----------------------------------------------------------------------*/
+/* 呼吸灯渐停                                                                 */                                                                      
+/*-----------------------------------------------------------------------*/
+
+void close_HHL(HHL_Light_Data *hhl)
+{
+	hhl->g_f_close=TRUE;	
+}
+
+
+
+/*-----------------------------------------------------------------------*/
+/*设置开启流水灯                                                         */                                                                      
+/*-----------------------------------------------------------------------*/
+void enable_HHL_flow(HHL_flow_data *hhl)
+{
+	hhl->enable=TRUE;
+}
+
+/*-----------------------------------------------------------------------*/
+/* 控制维修区流水灯                                                    */                                                                      
+/*-----------------------------------------------------------------------*/
+void control_HHL_flow(HHL_flow_data *hhl)
+{
+	int i=0;
+	for(i=0;i<5;i++)
+	{
+		if(i==hhl->g_f_flow)
+		{
+			*(hhl->light)=FLOW[i]*2500;
+			if((hhl->g_f_flow)!=0)
+				(hhl->g_f_flow)--;
+			else
+				hhl->g_f_flow=4;
+			return;
+		}
+	}
+}
+	
+/*-----------------------------------------------------------------------*/
+/* 控制维修区流水灯                                                    */  
+/* PIT调用								*/                                                                    
+/*-----------------------------------------------------------------------*/
+void control_HHL_flows(void)
+{
+	int i= 0;
+	
+	if(flow_count==0)
+	{
+		for (i = 0; i < 5; i++)
+		{
+			if (TRUE == (((HHL_flow_data *)HHL_flow_datas)[i].enable))
+			{
+				control_HHL_flow(&(((HHL_flow_data *)HHL_flow_datas)[i]));
+			}
+		}
+		flow_count=50;
+	}
+	else
+		flow_count--;
+	
+	
+}
+
+
+
 /*-----------------------------------------------------------------------*/
 /* 设置呵呵灯                                                                         */
 /* hhl 呵呵灯控制数据的指针                                                     */
@@ -258,15 +343,10 @@ void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD o
 	*(hhl->pLightness) = original_lightness;
 	hhl->enable = TRUE;
 	hhl->g_f_close=FALSE;
+	hhl->g_f_flow=FALSE;
 }
-/*-----------------------------------------------------------------------*/
-/* 呼吸灯渐停                                                                 */                                                                      
-/*-----------------------------------------------------------------------*/
 
-void close_HHL(HHL_Light_Data *hhl)
-{
-	hhl->g_f_close=TRUE;	
-}
+
 /*-----------------------------------------------------------------------*/
 /* 控制呵呵灯                                                                         */
 /* 在PIT中调用                                                                        */
@@ -303,7 +383,7 @@ void contorl_HHL(HHL_Light_Data *hhl)
 		else
 		now_lightness-=hhl->zunahme;
 	}
-	else if (FALSE==hhl->g_f_close&&TRUE == hhl->is_increasing)
+	else if (TRUE == hhl->is_increasing)
 	{
 		now_lightness += hhl->zunahme;
 		if (HHL_PWM_MAX <= now_lightness)
@@ -312,7 +392,7 @@ void contorl_HHL(HHL_Light_Data *hhl)
 			hhl->is_increasing = FALSE;
 		}
 	}
-	else if(FALSE==hhl->g_f_close&&FALSE == hhl->is_increasing)
+	else if(FALSE == hhl->is_increasing)
 	{
 		//now_lightness-=hhl->zunahme;
 		if (now_lightness <= HHL_PWM_MIN + hhl->zunahme)

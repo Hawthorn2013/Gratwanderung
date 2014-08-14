@@ -34,8 +34,13 @@ int main(void)
 	/*initLCD();
 	LCD_DISPLAY();
 	LCD_Fill(0x00);*/
-	//HHL_1_1=2500;
-	//HHL_3_1=2500;
+
+	enable_HHL_flow(&(HHL_flow_datas[0]));
+	enable_HHL_flow(&(HHL_flow_datas[1]));
+	enable_HHL_flow(&(HHL_flow_datas[2]));
+	enable_HHL_flow(&(HHL_flow_datas[3]));
+	enable_HHL_flow(&(HHL_flow_datas[4]));
+
 	/* Loop forever */
 	for (;;)
 	{
