@@ -4,11 +4,19 @@
 #include "includes.h"
 
 
+HHL_Light_Data HHL_light_datas[4][8];
+
+
+static void contorl_HHL(HHL_Light_Data *hhl);
+
+
 /*-----------------------------------------------------------------------*/
 /* 初始化赛道灯                                                                      */
 /*-----------------------------------------------------------------------*/
 void init_hehelight_PWM(void)
 {
+	int i = 0, j = 0;
+	
 	/* Modulus Up Counter 50HZ */
 	EMIOS_0.CH[23].CCR.B.UCPRE=0;	/* Set channel prescaler to divide by 4 */
 	EMIOS_0.CH[23].CCR.B.UCPEN = 1;	/* Enable prescaler; uses default divide by 4 */
@@ -193,4 +201,96 @@ void init_hehelight_PWM(void)
 	SIU.PSMI[26].R = 0;
 	SIU.PCR[61].R = 0x0A00;
 #endif
+
+	HHL_light_datas[1][1].pLightness = &HHL_1_1;
+	HHL_light_datas[1][2].pLightness = &HHL_1_2;
+	HHL_light_datas[1][3].pLightness = &HHL_1_3;
+	HHL_light_datas[1][4].pLightness = &HHL_1_4;
+	HHL_light_datas[1][5].pLightness = &HHL_1_5;
+	HHL_light_datas[1][6].pLightness = &HHL_1_6;
+	HHL_light_datas[1][7].pLightness = &HHL_1_7;
+	HHL_light_datas[2][1].pLightness = &HHL_2_1;
+	HHL_light_datas[2][2].pLightness = &HHL_2_2;
+	HHL_light_datas[2][3].pLightness = &HHL_2_3;
+	HHL_light_datas[2][4].pLightness = &HHL_2_4;
+	HHL_light_datas[2][5].pLightness = &HHL_2_5;
+	HHL_light_datas[2][6].pLightness = &HHL_2_6;
+	HHL_light_datas[2][7].pLightness = &HHL_2_7;
+	HHL_light_datas[3][1].pLightness = &HHL_3_1;
+	HHL_light_datas[3][2].pLightness = &HHL_3_2;
+	HHL_light_datas[3][3].pLightness = &HHL_3_3;
+	HHL_light_datas[3][4].pLightness = &HHL_3_4;
+	HHL_light_datas[3][5].pLightness = &HHL_3_5;
+	
+	for (i = 0; i < 4 * 8; i++)
+	{
+		((HHL_Light_Data *)HHL_light_datas)[i].enable = FALSE;
+	}
+}
+
+
+/*-----------------------------------------------------------------------*/
+/* 设置呵呵灯                                                                         */
+/* hhl 呵呵灯控制数据的指针                                                     */
+/* zunahme 每次在PIT中增加的亮度                                           */
+/* is_increasing 亮度变化方向                                                   */
+/* original_lightness 起始亮度                                                  */
+/*-----------------------------------------------------------------------*/
+void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD original_lightness)
+{
+	hhl->zunahme = zunahme;
+	hhl->is_increasing = is_increasing;
+	*(hhl->pLightness) = original_lightness;
+	hhl->enable = TRUE;
+}
+
+
+/*-----------------------------------------------------------------------*/
+/* 控制呵呵灯                                                                         */
+/* 在PIT中调用                                                                        */
+/*-----------------------------------------------------------------------*/
+void contorl_HHLs(void)
+{
+	int i = 0;
+	
+	for (i = 0; i < 4 * 8; i++)
+	{
+		if (TRUE == (((HHL_Light_Data *)HHL_light_datas)[i].enable))
+		{
+			contorl_HHL(&(((HHL_Light_Data *)HHL_light_datas)[i]));
+		}
+	}
+}
+
+
+/*-----------------------------------------------------------------------*/
+/* 控制呵呵灯                                                                         */
+/* 只被contorl_HHLs()调用                                                       */
+/*-----------------------------------------------------------------------*/
+void contorl_HHL(HHL_Light_Data *hhl)
+{
+	DWORD now_lightness = *(hhl->pLightness);
+	
+	if (TRUE == hhl->is_increasing)
+	{
+		now_lightness += hhl->zunahme;
+		if (HHL_PWM_MAX <= now_lightness)
+		{
+			now_lightness = HHL_PWM_MAX;
+			hhl->is_increasing = FALSE;
+		}
+	}
+	else
+	{
+		if (now_lightness <= HHL_PWM_MIN + hhl->zunahme)
+		{
+			now_lightness = HHL_PWM_MIN;
+			hhl->is_increasing = TRUE;
+		}
+		else
+		{
+			now_lightness -= hhl->zunahme;
+		}
+	}
+	*(hhl->pLightness) = now_lightness;
 }

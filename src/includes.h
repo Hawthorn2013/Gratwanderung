@@ -43,6 +43,9 @@ typedef unsigned short word;
 #endif
 #endif
 
+#define TRUE (1)
+#define FALSE (0)
+
 #include "MPC5604B_M27V.h"
 #include "init.h"
 #include "control.h"

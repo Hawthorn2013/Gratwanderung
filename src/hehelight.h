@@ -3,6 +3,10 @@
 #ifndef __HEHELIGHT_H__
 #define __HEHELIGHT_H__
 
+
+#define HHL_PWM_MAX (2500)
+#define HHL_PWM_MIN (0)
+
 /* 0灭-2500最亮 */
 #define HHL_PWM_1 (EMIOS_0.CH[1].CBDR.R)
 #define HHL_PWM_2 (EMIOS_0.CH[2].CBDR.R)
@@ -47,8 +51,19 @@
 #define HHL_3_5 HHL_PWM_22
 /* 无3_6-3_7 */
 
+/* 呵呵灯控制数据 */
+typedef struct
+{
+	vuint32_t *pLightness;	/* 指向PWM占空比寄存器的指针 */
+	BYTE enable;	/* 使能位 */
+	WORD zunahme;	/* 每次进入PIT中断PWM占空比寄存器增量，越大灯变化越快 */
+	BYTE is_increasing;	/* 亮度正在增加标志位 */
+}HHL_Light_Data;
+
 
 extern void init_hehelight_PWM(void);
+extern void contorl_HHLs(void);
+extern void set_HHL_mode(HHL_Light_Data* hhl, WORD zunahme, BYTE is_increasing, DWORD original_lightness);
 
 
 #endif
