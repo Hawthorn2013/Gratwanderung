@@ -38,7 +38,7 @@ void WIFI_D_action(WORD cmd)
 			set_HHL_mode(&(HHL_light_datas[1][1]),60,TRUE,HHL_PWM_MIN);	//Ç°°åÇÅºôÎü¼±´Ù
 			set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
 			g_f_drawbridge=1;
-			//g_f_fly_bridge_wifi=1;	
+			g_f_fly_bridge_wifi=1;	
 			delay_ms(1500);	/*µÈ´ýÇÅÉýÆð*/
 			close_HHL(&(HHL_light_datas[1][1]));
 			set_HHL_mode(&(HHL_light_datas[1][1]),30,TRUE,HHL_PWM_MIN);	//Ç°°ëÇÅºôÎü»ºÂý

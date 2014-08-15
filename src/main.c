@@ -35,11 +35,11 @@ int main(void)
 	LCD_DISPLAY();
 	LCD_Fill(0x00);*/
 
-	enable_HHL_flow(&(HHL_flow_datas[0]));
+	/*enable_HHL_flow(&(HHL_flow_datas[0]));
 	enable_HHL_flow(&(HHL_flow_datas[1]));
 	enable_HHL_flow(&(HHL_flow_datas[2]));
 	enable_HHL_flow(&(HHL_flow_datas[3]));
-	enable_HHL_flow(&(HHL_flow_datas[4]));
+	enable_HHL_flow(&(HHL_flow_datas[4]));*/
 
 	/* Loop forever */
 	for (;;)
@@ -68,8 +68,6 @@ int main(void)
 		/*Í¨Öª2¡¢4Æô¶¯*/
 		if(g_f_fly_bridge==1 && g_f_fly_bridge_wifi==1)
 		{
-			for(j=0;j<5;j++)
-				send_net_cmd(WIFI_ADDRESS_CAR_2,WIFI_CMD_NET_BRIDGE);
 			for(j=0;j<5;j++)
 				send_net_cmd(WIFI_ADDRESS_CAR_4,WIFI_CMD_NET_BRIDGE);
 			g_f_fly_bridge = 0;
