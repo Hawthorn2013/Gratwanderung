@@ -121,6 +121,14 @@ void WIFI_W_action(WORD cmd)
 			enable_HHL_flow(&(HHL_flow_datas[i-3]));
 		}
 	}
+	if(WIFI_CMD_NET_7_1==cmd)
+	{
+		for(i=3;i<8;i++)
+		{
+			disable_HHL_flow(&(HHL_flow_datas[i-3]));
+			close_HHL(&(HHL_light_datas[2][i]));
+		}
+	}
 }
 void all_action_control(void)
 {
@@ -132,6 +140,7 @@ void all_action_control(void)
 			WIFI_D_action(g_net_control_data.cmd);
 			WIFI_X_action(g_net_control_data.cmd);
 			WIFI_G_action(g_net_control_data.cmd);
+			WIFI_W_action(g_net_control_data.cmd);
 		}
 	}
 	if(WIFI_ADDRESS_DRAHTBRIDGE==g_device_NO)

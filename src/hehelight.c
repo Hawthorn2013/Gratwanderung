@@ -281,6 +281,10 @@ void enable_HHL_flow(HHL_flow_data *hhl)
 	hhl->enable=TRUE;
 }
 
+void disable_HHL_flow(HHL_flow_data *hhl)
+{
+	hhl->enable=FALSE;
+}
 /*-----------------------------------------------------------------------*/
 /* 控制维修区流水灯                                                    */                                                                      
 /*-----------------------------------------------------------------------*/
