@@ -136,7 +136,7 @@ void all_action_control(void)
 	{
 		if (g_net_control_data.is_new_cmd)
 		{
-			g_net_control_data.is_new_cmd = 0;	
+			g_net_control_data.is_new_cmd = 0;
 			WIFI_D_action(g_net_control_data.cmd);
 			WIFI_X_action(g_net_control_data.cmd);
 			WIFI_G_action(g_net_control_data.cmd);
@@ -147,6 +147,7 @@ void all_action_control(void)
 	{
 		if (g_net_control_data.is_new_cmd)
 		{
+			g_net_control_data.is_new_cmd = 0;
 			WIFI_G_action(g_net_control_data.cmd);
 		}
 	}

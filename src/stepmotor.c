@@ -84,32 +84,24 @@ void init_StepMotor_counter(void)	//PD12模数计数器入口，上升沿
 void INTC_StepMotor_Counter_Matched(void)
 {
 	close_StepMotor();
-	data_StepMotor.is_OK = 1;
 	g_f_fly_bridge=1;
 	EMIOS_0.CH[24].CSR.B.FLAG = 1;
+	data_StepMotor.is_OK = 1;
 }
 
 
 /*-----------------------------------------------------------------------*/
 /* 控制步进电机                                                          */
 /*-----------------------------------------------------------------------*/
-void set_StepMotor(SDWORD siteZunamhe)
+SWORD set_StepMotor(SDWORD siteZunamhe)
 {
-#if 0
-	data_StepMotor.is_OK = 0;
-	data_StepMotor.target_site = site;
-	if (data_StepMotor.current_site > data_StepMotor.target_site)
+	if (!data_StepMotor.is_OK)
 	{
-		data_StepMotor.target_dir = 1;
+		return 1;
 	}
-	else
-	{
-		data_StepMotor.target_dir = 0;
-	}
-#endif
 	if (!siteZunamhe)
 	{
-		return;
+		return 0;
 	}
 	data_StepMotor.is_OK = 0;
 	data_StepMotor.target_site = data_StepMotor.current_site + siteZunamhe;
@@ -133,4 +125,6 @@ void set_StepMotor(SDWORD siteZunamhe)
 		EMIOS_0.CH[24].CADR.R = 0 - siteZunamhe;
 		open_StepMotor(1);
 	}
+	
+	return 0;
 }

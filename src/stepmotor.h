@@ -13,7 +13,7 @@ extern void init_EMIOS_0_StepMotor(void);
 extern void open_StepMotor(int dir);
 extern void close_StepMotor(void);
 extern void init_StepMotor_counter(void);
-extern void set_StepMotor(SDWORD siteZunamhe);
+extern SWORD set_StepMotor(SDWORD siteZunamhe);
 
 extern int g_f_fly_bridge;
 
