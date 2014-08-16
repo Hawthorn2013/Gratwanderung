@@ -60,8 +60,8 @@ void WIFI_G_action(WORD cmd)
 			if(g_f_drahtbridge==0)	/*¸ÖË¿ÇÅµøÂä*/
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAHTBRIDGE_DOWN);
-				g_f_drahtbridge=1;
 				send_net_cmd(WIFI_ADDRESS_DRAWBRIDGE,WIFI_CMD_NET_6_3_3);
+				g_f_drahtbridge=1;
 			}
 		}
 	}
@@ -73,7 +73,7 @@ void WIFI_G_action(WORD cmd)
 		}
 		if(WIFI_CMD_NET_6_3_3==cmd)	/*¸ÖË¿ÇÅµøÂä*/
 		{
-			//close_HHL(&(HHL_light_datas[3][1]));	/*ºôÎüµÆÍ£Ö¹*/
+			close_HHL(&(HHL_light_datas[3][1]));	/*ºôÎüµÆÍ£Ö¹*/
 			delay_ms(1000);	/*µÈ´ýÇÅµøÂä*/
 			set_HHL_mode(&(HHL_light_datas[3][1]),60,TRUE,HHL_PWM_MIN);	/*¸ÖË¿ºôÎü¼±´Ù*/
 		}

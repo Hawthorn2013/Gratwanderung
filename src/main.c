@@ -35,12 +35,6 @@ int main(void)
 	LCD_DISPLAY();
 	LCD_Fill(0x00);*/
 
-	/*enable_HHL_flow(&(HHL_flow_datas[0]));
-	enable_HHL_flow(&(HHL_flow_datas[1]));
-	enable_HHL_flow(&(HHL_flow_datas[2]));
-	enable_HHL_flow(&(HHL_flow_datas[3]));
-	enable_HHL_flow(&(HHL_flow_datas[4]));*/
-
 	/* Loop forever */
 	for (;;)
 	{
@@ -54,15 +48,6 @@ int main(void)
 		}
 #endif
 
-#if 0
-		/* 执行赛场网络控制命令 */
-		if (1 == g_net_control_data.is_new_cmd)
-		{
-			g_net_control_data.is_new_cmd = 0;
-			
-			execute_net_cmd(g_net_control_data.cmd);
-		}
-#endif
 		all_action_control();
 		
 		/*通知2、4启动*/
@@ -77,6 +62,7 @@ int main(void)
 		/* 桥测试 */
 		if (!K2)
 		{
+			D0=~D0;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
@@ -89,6 +75,7 @@ int main(void)
 		/*桥回位*/
 		if (!K3)
 		{
+			D1=~D1;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
@@ -103,6 +90,7 @@ int main(void)
 		/*K4 桥正微调*/
 		if (!K4)
 		{
+			D2=~D2;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);
@@ -115,6 +103,7 @@ int main(void)
 		/*K5桥负微调*/
 		if (!K5)
 		{
+			D3=~D3;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);
