@@ -62,7 +62,6 @@ int main(void)
 		/* 桥测试 */
 		if (!K2)
 		{
-			D0=~D0;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
@@ -75,7 +74,6 @@ int main(void)
 		/*桥回位*/
 		if (!K3)
 		{
-			D1=~D1;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP);
@@ -90,7 +88,6 @@ int main(void)
 		/*K4 桥正微调*/
 		if (!K4)
 		{
-			D2=~D2;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor(0-(SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);
@@ -103,7 +100,6 @@ int main(void)
 		/*K5桥负微调*/
 		if (!K5)
 		{
-			D3=~D3;
 			if (WIFI_ADDRESS_DRAWBRIDGE == g_device_NO)
 			{
 				set_StepMotor((SDWORD)ZUNAMHE_DRAWBRIDGE_UP_TEST);

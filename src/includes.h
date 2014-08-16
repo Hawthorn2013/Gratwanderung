@@ -60,14 +60,14 @@ typedef unsigned short word;
 
 
 ///****************LED****************///
-#if 1
+#if 0
 #define D0 (SIU.GPDO[12].B.PDO)
 #define D1 (SIU.GPDO[13].B.PDO)
 #define D2 (SIU.GPDO[14].B.PDO)
 #define D3 (SIU.GPDO[15].B.PDO)
 #endif
 
-#if 1
+#if 0
 #define TD1 (SIU.GPDO[49].B.PDO)
 #define TD2 (SIU.GPDO[51].B.PDO)
 #define TD3 (SIU.GPDO[53].B.PDO)

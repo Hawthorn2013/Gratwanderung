@@ -101,6 +101,7 @@ void init_key(void)
 	SIU.PCR[52].R = 0x0100;
 	SIU.PCR[54].R = 0x0100;
 	SIU.PCR[56].R = 0x0100;	/* PD8 */
+	delay_ms(100);	/* 等待电容充电，防止按键开机触发 */
 }
 
 
