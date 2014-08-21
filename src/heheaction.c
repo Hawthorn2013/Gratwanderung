@@ -127,6 +127,10 @@ void WIFI_W_action(WORD cmd)
 		{
 			disable_HHL_flow(&(HHL_flow_datas[i-3]));
 			close_HHL(&(HHL_light_datas[2][i]));
+			for(i=3;i<8;i++)
+			{
+				set_HHL_mode(&(HHL_light_datas[2][i]),10,TRUE,HHL_PWM_MIN);
+			}
 		}
 	}
 }
